@@ -1,0 +1,10 @@
+{
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+        "typeRoots": ["./node_modules/@types"],
+        "strict": true,
+        "baseUrl": "src",
+        "outDir": "dist"
+    }
+}
