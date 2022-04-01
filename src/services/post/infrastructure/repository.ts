@@ -4,9 +4,7 @@ import { Post } from '../domain/model';
 @Service()
 export class PostRepository{
     private repository = AppDataSource.getRepository(Post);
-    save(post: Post){
-        console.log('repository 동작중');
-        
+    save(post: Post){        
         return this.repository.save(post);
     };
 }

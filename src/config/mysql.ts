@@ -1,6 +1,5 @@
 import { DataSourceOptions } from "typeorm";
 import 'dotenv/config';
-console.log('process.env.MYSQL_HOST: ',process.env.MYSQL_HOST);
 
 export const mysqlConfig:DataSourceOptions = {
     type: 'mysql',
@@ -14,5 +13,5 @@ export const mysqlConfig:DataSourceOptions = {
         'dist/services/profile/domain/*.js',
     ],
     synchronize: true,
-    logging: true
+    logging: false
 };

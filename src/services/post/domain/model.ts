@@ -1,4 +1,4 @@
-import {Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn} from 'typeorm'
+import {Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from 'typeorm'
 export type TypeOfPost = {
     title: string,
     img: string,
@@ -7,7 +7,7 @@ export type TypeOfPost = {
 @Entity('post')
 export class Post {
     
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Column()
@@ -22,22 +22,21 @@ export class Post {
     @Column()
     text!: string;
 
-    @OneToMany(()=> Comment, (comment) => comment.post)
+    @OneToMany(()=> Comment, (comment) => comment.post, {cascade: true})
     @JoinColumn()
     comments!: Comment[];
 
     constructor(props?:TypeOfPost){
-        if(props){
+        if (props) {
             this.comments = [];
-            this.text = props.text;
+            this.text = props.text ?? '';
             this.date = new Date();
-            this.title = props.title;
-            this.img = props.img;    
+            this.title = props.title ?? '';
+            this.img = props.img ?? '';    
         }
-        
     }
 
-    static of(props:TypeOfPost){
+    static of(props: TypeOfPost){
             return new Post(props);
     }
 };
@@ -45,7 +44,7 @@ export class Post {
 @Entity('comment')
 export class Comment {
     
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Column()
