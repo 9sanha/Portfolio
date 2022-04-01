@@ -2,6 +2,8 @@
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"],
     "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "typeRoots": ["./node_modules/@types"],
         "strict": true,
         "baseUrl": "src",

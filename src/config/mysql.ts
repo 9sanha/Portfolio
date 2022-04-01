@@ -1,20 +1,18 @@
-// 설정이 적용된 후에 나머지 코드가 실행되야하기 때문에 가장 위에 작성되어야 함
+import { DataSourceOptions } from "typeorm";
 import 'dotenv/config';
+console.log('process.env.MYSQL_HOST: ',process.env.MYSQL_HOST);
 
-import { DataSource  } from "typeorm"
-
-export const connectDB = async (): Promise<void> => {
-  await new DataSource({
+export const mysqlConfig:DataSourceOptions = {
     type: 'mysql',
-    host: process.env.MYSQL_HOST,
-    port: Number(process.env.MYSQL_PORT),
-    database: process.env.MYSQL_DATABASE,
-    username: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
+    host: process.env.MYSQL2_HOST,
+    port: Number(process.env.MYSQL2_PORT),
+    database: process.env.MYSQL2_DATABASE,
+    username: process.env.MYSQL2_USER,
+    password: process.env.MYSQL2_PASSWORD,
     entities: [
-      'dist/services/devices/domain/*.js',
+        'dist/services/post/domain/*.js',
+        'dist/services/profile/domain/*.js',
     ],
     synchronize: true,
-    logging: false
-  });
+    logging: true
 };

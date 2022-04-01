@@ -1,20 +1,27 @@
 import * as Koa from 'koa';
-import { connectDB } from './config/mysql'
 import * as cors from 'koa-cors'
-import * as bodyParser from 'koa-bodyparser'
+import * as bodyParser from 'koa-body'
+import { globalRouter } from './routes';
+import { AppDataSource } from './config/typeorm';
+import "reflect-metadata"
 
 const app = new Koa();
-const connectDatabase = connectDB();
+const dbConnection = AppDataSource.initialize();
+// const port = Number(process.env.SERVER_PORT);
 const port = 3000;
+console.log(port);
 
-connectDatabase.then(()=>{
-    console.log('DB')
-})
 
-app.use(async (ctx) => {
-    bodyParser()
-    cors({origin:'*'})
-    ctx.body = {msg: 'Hello World'};
+
+
+app.use((ctx) => {
+    bodyParser();
+    cors({origin:'*'});
+    globalRouter.middleware();
+    console.log('ctx.body: ',ctx.body);
+    
+    console.log('요청');
+    
 });
 
 app.listen(port);
