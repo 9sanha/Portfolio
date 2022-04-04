@@ -10,6 +10,6 @@ export default {
         const service = Container.get(PostService);
         const post: TypeOfPost = ctx.request.body;
         const data = await service.register(post); 
-        ctx.body = {data};
+        ctx.body = data;
     },
 } as Spec;

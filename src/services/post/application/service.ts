@@ -13,4 +13,12 @@ export class PostService{
         return this.postRepository.save(post);
     }
 
+    list(){
+        return this.postRepository.find();
+    }
+
+    getPostById(postId: number){
+        // TODO: 찾을 수 없는 포스트 일 때 boom
+        return this.postRepository.findById(postId);
+    }
 }
