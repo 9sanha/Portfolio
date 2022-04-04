@@ -1,4 +1,4 @@
-import {Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from 'typeorm'
+import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
 export type TypeOfPost = {
     title: string,
     img: string,
@@ -16,8 +16,11 @@ export class Post {
     @Column()
     img!: string;
 
-    @Column()
-    date!: Date;
+    @CreateDateColumn({ name: 'create_date' })
+    createdAt!: Date;
+
+    @UpdateDateColumn({ name: 'updated_date' })
+    updatedAt!: Date;
 
     @Column()
     text!: string;
@@ -30,7 +33,6 @@ export class Post {
         if (props) {
             this.comments = [];
             this.text = props.text ?? '';
-            this.date = new Date();
             this.title = props.title ?? '';
             this.img = props.img ?? '';    
         }
@@ -38,6 +40,11 @@ export class Post {
 
     static of(props: TypeOfPost){
             return new Post(props);
+    }
+
+    update(post:{title?:string, text?: string}){
+        this.text = post.text ?? this.text;
+        this.title = post.title ?? this.title;
     }
 };
 
