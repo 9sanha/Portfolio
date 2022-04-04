@@ -21,4 +21,13 @@ export class PostService{
         // TODO: 찾을 수 없는 포스트 일 때 boom
         return this.postRepository.findById(postId);
     }
+
+    async update(postId: number,patchData:{title?:string, text?:string}){
+        const post = await this.getPostById(postId);
+        if(post){
+            post.update(patchData);
+            return this.postRepository.save(post);
+        }
+        
+    }
 }
