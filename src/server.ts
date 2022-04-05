@@ -1,7 +1,7 @@
 import * as Koa from 'koa';
 import * as cors from '@koa/cors'
 import * as bodyParser from 'koa-body'
-import { globalRouter } from './routes';
+import { router } from './routes';
 import { AppDataSource } from './config/typeorm';
 import "reflect-metadata"
 
@@ -11,6 +11,6 @@ const port = Number(process.env.SERVER_PORT);
 
 app.use(bodyParser());
 app.use(cors());
-app.use(globalRouter.middleware());
+app.use(router.middleware());
 
 app.listen(port);
