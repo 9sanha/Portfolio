@@ -1,8 +1,13 @@
-import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
 export type TypeOfPost = {
     title: string,
     img: string,
     text: string
+}
+export type TypeOfComment = {
+    nickname:string, 
+    password:string,
+    context: string
 }
 @Entity('post')
 export class Post {
@@ -46,6 +51,10 @@ export class Post {
         this.text = post.text ?? this.text;
         this.title = post.title ?? this.title;
     }
+
+    addComment(comment: Comment){
+        this.comments.push(comment);
+    }
 };
 
 @Entity('comment')
@@ -63,13 +72,28 @@ export class Comment {
     @Column()
     context!: string;
 
+    @CreateDateColumn({ name: 'create_date' })
+    createdAt!: Date;
+
+    @UpdateDateColumn({ name: 'updated_date' })
+    updatedAt!: Date;
+
+    @DeleteDateColumn({name: 'delete_date'})
+    deletedAt!: Date;
+    
     @ManyToOne(()=>Post, (post) => post.comments )
     post!: Post;
 
-    constructor(nickname:string, password:string,context: string ){
-        this.nickname = nickname;
-        this.context = context;
-        this.password = password;
+    constructor(props?:TypeOfComment){
+        if (props) {
+        this.nickname = props.nickname ?? '';
+        this.context = props.context ?? '';
+        this.password = props.password ?? '';
+        }
+    }
+    
+    static of(props:TypeOfComment){
+        return new Comment(props);
     }
 
 };

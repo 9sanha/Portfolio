@@ -14,7 +14,6 @@ export class PostRepository{
     };
 
     findById(id: number){
-        return this.repository.findOneBy({id:id});
+        return this.repository.findOneOrFail({relations: ['comments'], where: {id}});
     }
-
 }
