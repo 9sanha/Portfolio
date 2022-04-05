@@ -47,7 +47,8 @@ export default {
         const post: TypeOfPost = ctx.request.body;
 
         const data = await service.register(post); 
-
+        console.log(data);
+        
         ctx.body = {data};
     },
 } as Spec;

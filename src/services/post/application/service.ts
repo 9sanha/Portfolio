@@ -40,9 +40,10 @@ export class PostService{
         
         const comment = Comment.of(props);
         
-        if (post){
+        if (post){     
             post.addComment(comment);
-            return this.postRepository.save(post);
+            const comments =  (await this.postRepository.save(post)).comments;
+            return comments[comments.length-1];
         }
         
     }

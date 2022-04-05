@@ -52,8 +52,8 @@ export class Post {
         this.title = post.title ?? this.title;
     }
 
-    addComment(comment: Comment){
-        this.comments.push(comment);
+    addComment(comment: Comment){        
+        this.comments.push({...comment});
     }
 };
 
