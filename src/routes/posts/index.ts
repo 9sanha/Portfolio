@@ -4,4 +4,5 @@ import get from './get';
 import { updateRoutes } from './update';
 import { deleteRoutes } from './delete';
 
+
 export const postsRoutes = [...deleteRoutes,...updateRoutes, post, get];
