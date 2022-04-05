@@ -1,6 +1,7 @@
 import {Inject, Service} from 'typedi'
-import {TypeOfPost, Post} from '../domain/model'
+import {TypeOfPost, Post, TypeOfComment} from '../domain/model'
 import { PostRepository } from '../infrastructure/repository';
+import { Comment } from '../domain/model';
 
 @Service()
 export class PostService{
@@ -26,6 +27,17 @@ export class PostService{
         const post = await this.getPostById(postId);
         if(post){
             post.update(patchData);
+            return this.postRepository.save(post);
+        }
+    }
+
+    async registerComment(postId:number, props: TypeOfComment){
+        const post = await this.getPostById(postId);
+        
+        const comment = Comment.of(props);
+        
+        if (post){
+            post.addComment(comment);
             return this.postRepository.save(post);
         }
         
