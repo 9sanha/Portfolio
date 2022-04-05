@@ -46,7 +46,6 @@ export default {
         const service = Container.get(PostService);
         
         const data = await service.registerComment(Number(postId), {nickname, context, password})
-        console.log({data});
         
         ctx.body =  { data };
     }
