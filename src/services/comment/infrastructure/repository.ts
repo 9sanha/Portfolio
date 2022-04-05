@@ -12,7 +12,6 @@ export class CommentRepository{
     }
 
     delete(id:number){
-
         return this.repository.softDelete(id);
     }
 

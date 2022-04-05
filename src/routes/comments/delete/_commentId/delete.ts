@@ -11,9 +11,9 @@ export default {
         
         const service = Container.get(CommentService);
         
-        const data = await service.delete(commentId);
+        service.delete(commentId);
         
-        ctx.body = data;
+        ctx.body = {code:200};
         
     }
 } as Spec;
