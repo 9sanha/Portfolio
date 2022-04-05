@@ -17,7 +17,7 @@ const outputSchema = {
     id: Joi.number().required(),
     createdAt: Joi.date().required(),
     updatedAt: Joi.date().required(),
-}
+};
 
 export default {
     path:'/posts',
