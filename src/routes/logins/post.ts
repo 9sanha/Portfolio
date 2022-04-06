@@ -35,7 +35,6 @@ export default {
         const service = Container.get(UserService);
 
         const token = service.login(id, password);
-        console.log(token);
 
         ctx.body = { data: { token } };
     },
