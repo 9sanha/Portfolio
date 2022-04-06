@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/9sanha/Portfolio#readme",
   "dependencies": {
+    "@hapi/boom": "^9.1.4",
     "@koa/cors": "^3.3.0",
     "dotenv": "^16.0.0",
     "install": "^0.13.0",
@@ -36,6 +37,7 @@
     "typeorm": "^0.3.4"
   },
   "devDependencies": {
+    "@types/hapi__boom": "^9.0.1",
     "@types/koa": "^2.13.4",
     "@types/koa__cors": "^3.1.1",
     "@types/koa-bodyparser": "^4.3.7",

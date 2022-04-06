@@ -1,6 +1,7 @@
 import {Service} from 'typedi'
 import { AppDataSource } from '../../../config/typeorm';
 import { Post } from '../domain/model';
+import { badRequest } from '../../../const/boom';
 @Service()
 export class PostRepository{
     
@@ -10,12 +11,17 @@ export class PostRepository{
         return this.repository.save(post);
     };
 
-    find(){
-        return this.repository.find();
+    async find(){
+        const posts = await this.repository.find();
+        return posts;
     };
 
-    findById(id: number){
-        return this.repository.findOneOrFail({relations: ['comments'], where: {id}});
+    async findById(id: number){
+        const post1 =  await this.repository.findOneOrFail({relations: ['comments'], where: {id}}).catch(()=>{
+            throw badRequest.NO_EXIST_ENTITY_ERROR;
+        });
+        
+        return post1;
     };
 
     delete(postId: number) {
