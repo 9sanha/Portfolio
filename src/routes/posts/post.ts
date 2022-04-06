@@ -1,4 +1,4 @@
-import {  Joi, Spec } from 'koa-joi-router';
+import { Joi, Spec } from 'koa-joi-router';
 import { PostService } from '../../services/post/application/service';
 import { TypeOfPost } from '../../services/post/domain/model';
 import Container from 'typedi';
@@ -20,35 +20,33 @@ const outputSchema = {
 };
 
 export default {
-    path:'/posts',
-    method:'post',
+    path: '/posts',
+    method: 'post',
     meta: {
         swagger: {
             summary: '게시물 생성',
             descriptions: '운영자만 게시물을 작성할 수 있다.',
-            tags: ['posts']
-        }
+            tags: ['posts'],
+        },
     },
     validate: {
         type: 'form',
         body: bodySchema,
         output: {
-            200:{
+            200: {
                 body: {
-                    data: {...outputSchema},
-                }
+                    data: { ...outputSchema },
+                },
             },
         },
     },
     handler: async (ctx) => {
-        
         const service = Container.get(PostService);
 
         const post: TypeOfPost = ctx.request.body;
 
-        const data = await service.register(post); 
-        console.log(data);
-        
-        ctx.body = {data};
+        const data = await service.register(post);
+
+        ctx.body = { data };
     },
 } as Spec;
