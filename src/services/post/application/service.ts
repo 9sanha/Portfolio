@@ -8,7 +8,7 @@ export class PostService {
     @Inject()
     private postRepository!: PostRepository;
 
-    register(props: TypeOfPost) {
+    save(props: TypeOfPost) {
         const post = Post.of(props);
         return this.postRepository.save(post);
     }

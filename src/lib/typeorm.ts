@@ -1,4 +1,4 @@
 import { DataSource } from 'typeorm';
-import { mysqlConfig } from '../config/mysql';
+import dbConfig from '../config/mysql';
 
-export const AppDataSource = new DataSource(mysqlConfig);
+export const AppDataSource = new DataSource(dbConfig);

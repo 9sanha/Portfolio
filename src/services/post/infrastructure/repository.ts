@@ -11,17 +11,15 @@ export class PostRepository {
     }
 
     async find() {
-        const posts = await this.repository.find();
-        return posts;
+        return await this.repository.find();
     }
 
     async findById(id: number) {
-        const post = await this.repository
+        return await this.repository
             .findOneOrFail({ relations: ['comments'], where: { id } })
             .catch(() => {
                 throw badRequest.NO_EXIST_ENTITY_ERROR;
             });
-        return post;
     }
 
     delete(postId: number) {
