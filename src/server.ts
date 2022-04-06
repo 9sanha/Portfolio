@@ -2,7 +2,7 @@ import * as Koa from 'koa';
 import * as cors from '@koa/cors';
 import * as bodyParser from 'koa-body';
 import { router } from './routes';
-import { AppDataSource } from './config/typeorm';
+import { AppDataSource } from './lib/typeorm';
 import 'reflect-metadata';
 import { errorHandlerMiddleware } from './middlewares/error-handler';
 

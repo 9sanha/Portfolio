@@ -1,7 +1,7 @@
-import { Service } from "typedi";
-import { AppDataSource } from "../../../config/typeorm";
-import { Post } from "../domain/model";
-import { badRequest } from "../../../const/boom";
+import { Service } from 'typedi';
+import { AppDataSource } from '../../../lib/typeorm';
+import { Post } from '../domain/model';
+import { badRequest } from '../../../const/boom';
 @Service()
 export class PostRepository {
     private repository = AppDataSource.getRepository(Post);
@@ -17,7 +17,7 @@ export class PostRepository {
 
     async findById(id: number) {
         const post = await this.repository
-            .findOneOrFail({ relations: ["comments"], where: { id } })
+            .findOneOrFail({ relations: ['comments'], where: { id } })
             .catch(() => {
                 throw badRequest.NO_EXIST_ENTITY_ERROR;
             });

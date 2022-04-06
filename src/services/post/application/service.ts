@@ -1,7 +1,7 @@
-import { Inject, Service } from "typedi";
-import { TypeOfPost, Post, TypeOfComment } from "../domain/model";
-import { PostRepository } from "../infrastructure/repository";
-import { Comment } from "../domain/model";
+import { Inject, Service } from 'typedi';
+import { TypeOfPost, Post, TypeOfComment } from '../domain/model';
+import { PostRepository } from '../infrastructure/repository';
+import { Comment } from '../domain/model';
 
 @Service()
 export class PostService {
@@ -36,9 +36,7 @@ export class PostService {
         const comment = Comment.of(props);
         post.addComment(comment);
         const comments = (await this.postRepository.save(post)).comments;
-        console.log(comments);
 
         return comments.pop();
-        // return comments[comments.length - 1];
     }
 }

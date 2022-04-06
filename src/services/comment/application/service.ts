@@ -1,14 +1,12 @@
-import { Inject, Service } from "typedi";
-import { CommentRepository } from "../infrastructure/repository";
+import { Inject, Service } from 'typedi';
+import { CommentRepository } from '../infrastructure/repository';
 
 @Service()
-export class CommentService{
-
+export class CommentService {
     @Inject()
     private commentRepository!: CommentRepository;
 
-    delete(commentId: number){
+    delete(commentId: number) {
         return this.commentRepository.delete(commentId);
     }
-
 }
