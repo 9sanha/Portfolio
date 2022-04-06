@@ -18,7 +18,6 @@ export class PostService {
     }
 
     getPostById(postId: number) {
-        // TODO: 찾을 수 없는 포스트 일 때 boom
         return this.postRepository.findById(postId);
     }
 
@@ -37,6 +36,9 @@ export class PostService {
         const comment = Comment.of(props);
         post.addComment(comment);
         const comments = (await this.postRepository.save(post)).comments;
-        return comments[comments.length - 1];
+        console.log(comments);
+
+        return comments.pop();
+        // return comments[comments.length - 1];
     }
 }
