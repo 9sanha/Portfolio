@@ -4,10 +4,10 @@ import Container from "typedi";
 
 const outputSchema =  Joi.array().items(
         Joi.object({
-            id: Joi.number().required(),
+            id: Joi.number().required().description('게시글 id'),
             text: Joi.string().required().description('본문'),
             title: Joi.string().required().description('제목'),
-            img: Joi.string().required(),
+            img: Joi.string().required().description('이미지 url'),
             createdAt: Joi.date().required(),
             updatedAt: Joi.date().required(),
         })
